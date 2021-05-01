@@ -1,0 +1,2 @@
+# auto
+upbit auto trading 
