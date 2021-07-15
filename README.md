@@ -1,8 +1,6 @@
 # auto
 AWS 서버에 올리기 위한 upbit auto trading algorithm
 
-```
-python3
 def post_message(token, channel, text):
     """슬랙 메시지 전송"""
     response = requests.post("https://slack.com/api/chat.postMessage",
@@ -55,7 +53,7 @@ while True:
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-BTC", 0.5)
+            target_price = get_target_price("KRW-BTC", 0.5)   # k값=0.5 설정 / 변동성*k에 따라 매수 시점 달라짐
             ma15 = get_ma15("KRW-BTC")
             current_price = get_current_price("KRW-BTC")
             if target_price < current_price and ma15 < current_price:
@@ -73,4 +71,7 @@ while True:
         print(e)
         post_message(myToken,"#crypto", e)
         time.sleep(1)
-```
+
+거래는 활발하게 진행되었으나, 하락장에서는 유의미한 양의 수익률을 보여주지는 못했다.
+또한 업비트가 타 거래소에 비해 수수료 부담이 적은 거래소임에도 불구하고, 많은 거래로 수수료가 꽤 부담되었다.
+전략을 수정해야 할 필요가 있다.
